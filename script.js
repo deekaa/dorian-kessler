@@ -2,6 +2,9 @@ const filterButtons = document.querySelectorAll(".filter-button");
 const projectCards = document.querySelectorAll(".project-card");
 const profileIntro = document.querySelector("#profil .profile-copy p:first-child");
 const footerNote = document.querySelector(".footer-inner p");
+const portraitImage = document.querySelector(".portrait img");
+const bfhPortraitUrl =
+  "https://www.bfh.ch/.imaging/mte/bfh-theme/profile-xs/dam/people/k/kld1.jpg/jcr%3Acontent/kld1.jpg";
 
 if (profileIntro) {
   profileIntro.textContent =
@@ -10,6 +13,10 @@ if (profileIntro) {
 
 if (footerNote) {
   footerNote.remove();
+}
+
+if (portraitImage) {
+  portraitImage.src = bfhPortraitUrl;
 }
 
 const styleFix = document.createElement("style");
