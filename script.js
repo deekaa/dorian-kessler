@@ -7,6 +7,10 @@ if (profileIntro) {
     "Ich bin Professor an der Berner Fachhochschule und am Institut Organisation und Sozialmanagement tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.";
 }
 
+const styleFix = document.createElement("style");
+styleFix.textContent = ".publication-columns{gap:clamp(24px,5vw,74px)}";
+document.head.appendChild(styleFix);
+
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const filter = button.dataset.filter;
