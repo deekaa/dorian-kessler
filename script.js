@@ -1,10 +1,15 @@
 const filterButtons = document.querySelectorAll(".filter-button");
 const projectCards = document.querySelectorAll(".project-card");
 const profileIntro = document.querySelector("#profil .profile-copy p:first-child");
+const footerNote = document.querySelector(".footer-inner p");
 
 if (profileIntro) {
   profileIntro.textContent =
     "Ich bin Professor an der Berner Fachhochschule und am Institut Organisation und Sozialmanagement tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.";
+}
+
+if (footerNote) {
+  footerNote.remove();
 }
 
 const styleFix = document.createElement("style");
