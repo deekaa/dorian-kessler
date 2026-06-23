@@ -1,60 +1,256 @@
-const filterButtons = document.querySelectorAll(".filter-button");
-const projectCards = document.querySelectorAll(".project-card");
-const profileIntro = document.querySelector("#profil .profile-copy p:first-child");
-const impactParagraph = document.querySelectorAll("#profil .profile-copy p")[2];
-const footerNote = document.querySelector(".footer-inner p");
-const portraitImage = document.querySelector(".portrait img");
-const projectNavLink = document.querySelector('.site-nav a[href="#projekte"]');
-const publicationNavLink = document.querySelector('.site-nav a[href="#publikationen"]');
-const projectKicker = document.querySelector("#projekte .kicker");
-const publicationKicker = document.querySelector("#publikationen .kicker");
-const portraitUrl = "./assets/dorian-kessler-soft.jpg?v=portrait-file";
+const BFH_IMAGE =
+  "https://www.bfh.ch/.imaging/mte/bfh-theme/profile-lg-2x/dam/people/k/kld1.jpg/jcr:content/kld1.jpg";
+const BFH_LINK = "https://www.bfh.ch/soziale-arbeit/de/";
+const IORG_LINK =
+  "https://www.bfh.ch/soziale-arbeit/de/forschung/forschungsbereiche/institut-organisation-sozialmanagement/";
+const makeLink = (href, text) =>
+  `<a class="inline-link" href="${href}" target="_blank" rel="noreferrer">${text}</a>`;
 
-if (profileIntro) {
-  profileIntro.textContent =
-    "Ich bin Professor an der Berner Fachhochschule und am Institut Organisation und Sozialmanagement tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.";
+const translations = {
+  de: {
+    title: "Prof. Dr. Dorian Kessler | Wirksamkeit, Daten und soziale Sicherheit",
+    description:
+      "Persönliche Profilseite von Prof. Dr. Dorian Kessler zu Wirksamkeit, Datenverknüpfung, Predictive Risk Models, generativer KI, Armut, Familie und sozialer Sicherheit.",
+    headerLabel: "Hauptnavigation",
+    languageLabel: "Sprachen",
+    nav: ["Profil", "Projekte", "Publikationen", "Kontakt"],
+    context: `${makeLink(BFH_LINK, "BFH Soziale Arbeit")} · ${makeLink(
+      IORG_LINK,
+      "Institut Organisation und Sozialmanagement"
+    )}`,
+    lead:
+      "Ich arbeite zu Wirksamkeit sozialer Organisationen, Datenwissenschaft in der Sozialen Arbeit und sozialen Risiken im Zusammenspiel von Armut, Familie, Gesundheit und Sozialpolitik.",
+    profileButton: "Profil",
+    projectButton: "Projekte",
+    portraitAlt: "Porträt von Prof. Dr. Dorian Kessler",
+    portraitCaption: "Prof. Dr. Dorian Kessler, BFH Soziale Arbeit",
+    profileKicker: "Profil",
+    profileTitle: "Datenwissenschaft in der Sozialen Arbeit mit Schwerpunkt Wirksamkeit.",
+    profileText: [
+      `Ich bin Professor an der ${makeLink(BFH_LINK, "BFH Soziale Arbeit")} und am ${makeLink(
+        IORG_LINK,
+        "Institut Organisation und Sozialmanagement"
+      )} tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.`,
+      "Verknüpfte Daten sind Datensätze, die datenschutzkonform zusammengeführt werden, etwa Informationen zu Sozialhilfe, Sozialversicherungen, Gesundheit, Erwerbsverläufen, Haushalten oder Familienereignissen. Dadurch werden Übergänge und Belastungen sichtbar, die in einzelnen Datenquellen oft nur teilweise erkennbar sind.",
+      "In diesem Rahmen interessieren mich auch generative KI und Predictive Risk Models: als Werkzeuge, die fachliche Entscheide in der Praxis der Sozialen Arbeit unterstützen können, aber fachlich, ethisch und empirisch geprüft werden müssen. Für Wirkungsfragen nutze ich robuste Designs, die Veränderungen vor und nach einer Intervention oder Reform mit geeigneten Vergleichsgruppen betrachten.",
+    ],
+    projectsKicker: "Projekte",
+    projectsTitle: "Ausgewählte Projekte entlang von Wirkung, Daten und sozialer Sicherheit.",
+    filters: { all: "Alle", wirkung: "Wirkung", ki: "Daten/KI", armut: "Armut/Familie" },
+    projectLinks: { project: "Projektseite", blog: "Datenauswertungen Kinderleicht gemacht" },
+    publicationsKicker: "Publikationen",
+    publicationsTitle:
+      "Publikationen sowie ausgewählte Beiträge in Medien und Fachöffentlichkeit.",
+    peerTitle: "Peer-reviewte Publikationen",
+    mediaTitle: "Zeitung und Fernsehen",
+    arbor: "Aktualisierte Publikationsliste auf ARBOR",
+    notes: ["Beitrag öffnen", "Sendung öffnen", "Artikel öffnen"],
+    original: "Originalseite öffnen",
+    contactKicker: "Kontakt",
+    contactTitle: "Kontakt und Zusammenarbeit",
+    bfhProfile: "BFH-Profil",
+    top: "Nach oben",
+    projects: {
+      foresait: ["2025-2026 · SNF Spark", "FORESAIT - Forecasting in Social Assistance", "Verknüpfte Registerdaten und maschinelles Lernen werden genutzt, um Verläufe in der Sozialhilfe präzise, fair und praxistauglich vorherzusagen."],
+      prediction: ["2025-2028 · Kanton Bern/SKOS", "Prognosekompetenzen von Sozialhilfefachpersonen", "Fachliche Prognosen dienen als Vergleichspunkt für statistische Modelle. Untersucht wird, wo Modelle zusätzliche Information liefern und wo professionelle Urteilskraft zentral bleibt."],
+      fokus: ["2025-2026 · Stadt Biel", "Fokus Arbeit: Messung der Langzeitwirkung", "Die Evaluation der Gruppenintervention wird langfristig weitergeführt, um Effekte auf Erwerb, Einkommen, Sozialhilfebezug und subjektive Ressourcen sichtbar zu machen."],
+      "wohlen-dashboard": ["Regionaler Sozialdienst Wohlen · Dashboard", "Dashboard Kosten Regionaler Sozialdienst Wohlen", "Datenauswertungen werden so aufbereitet, dass Kostenentwicklungen und Steuerungsfragen in sozialen Organisationen leicht zugänglich werden."],
+      "ai-survey": ["2026 · AI Micro Grant BFH", "Befragung KI-Nutzung im Sozialbereich", "Empirische Momentaufnahme dazu, wie Fachpersonen im Sozialbereich generative KI einsetzen, einschätzen und organisatorisch einbetten."],
+      health: ["2020-2021 · BAG", "Gesundheit von Sozialhilfebeziehenden", "Schweizweite verknüpfte Daten zeigen gesundheitliche Belastungen, Versorgungsnutzung und Zusammenhänge mit Erwerbsintegration."],
+      divorce: ["2014-2020 · SNF", "Scheidung als soziales Risiko", "Das Projekt untersucht wirtschaftliche, soziale und institutionelle Folgen von Scheidung in der Schweiz, besonders entlang von Geschlecht und Armut."],
+      "family-unemployment": ["2018-2023 · SNF", "Familienmodelle und Arbeitslosigkeit", "Analysen zu Arbeitslosenversicherung, Haushaltsverantwortung, Gesundheit, Partnerschaftsstabilität, Geburtsoutcomes und wirtschaftlicher Prekarität."],
+      "violence-costs": ["2024-2028 · Stiftung KidsToo", "Kosten von Gewalt in Paarbeziehungen", "Ein laufendes Projekt zu gesellschaftlichen und institutionellen Kosten von Gewalt in Paarbeziehungen, abhängig vom gesicherten Datenzugang."],
+    },
+  },
+  en: {
+    title: "Prof. Dr. Dorian Kessler | Impact, Data and Social Security",
+    description:
+      "Personal profile of Prof. Dr. Dorian Kessler on impact, linked data, predictive risk models, generative AI, poverty, family and social security.",
+    headerLabel: "Main navigation",
+    languageLabel: "Languages",
+    nav: ["Profile", "Projects", "Publications", "Contact"],
+    context: `${makeLink(BFH_LINK, "BFH School of Social Work")} · ${makeLink(
+      IORG_LINK,
+      "Institute for Organisation and Social Management"
+    )}`,
+    lead:
+      "My work focuses on the impact of social organisations, data science in social work, and social risks at the intersection of poverty, family, health and social policy.",
+    profileButton: "Profile",
+    projectButton: "Projects",
+    portraitAlt: "Portrait of Prof. Dr. Dorian Kessler",
+    portraitCaption: "Prof. Dr. Dorian Kessler, BFH School of Social Work",
+    profileKicker: "Profile",
+    profileTitle: "Data science in social work with a focus on impact.",
+    profileText: [
+      `I am Professor at the ${makeLink(BFH_LINK, "BFH School of Social Work")} and work at the ${makeLink(IORG_LINK, "Institute for Organisation and Social Management")}. I use linked data to study impact, poverty, family, health and social policy empirically.`,
+      "Linked data are datasets that are combined in a privacy-preserving way, for example information on social assistance, social insurance, health, employment histories, households or family events. This makes transitions and burdens visible that often remain only partly observable in individual data sources.",
+      "I am also interested in generative AI and predictive risk models as tools that may support professional decisions in social work practice, but need to be assessed professionally, ethically and empirically. For impact questions, I use robust designs that compare developments before and after an intervention or reform with suitable comparison groups.",
+    ],
+    projectsKicker: "Projects",
+    projectsTitle: "Selected projects across impact, data and social security.",
+    filters: { all: "All", wirkung: "Impact", ki: "Data/AI", armut: "Poverty/Family" },
+    projectLinks: { project: "Project page", blog: "Making data analyses easy" },
+    publicationsKicker: "Publications",
+    publicationsTitle:
+      "Publications and selected contributions in media and professional debate.",
+    peerTitle: "Peer-reviewed publications",
+    mediaTitle: "Newspapers and television",
+    arbor: "Updated publication list on ARBOR",
+    notes: ["Open contribution", "Open broadcast", "Open article"],
+    original: "Open original page",
+    contactKicker: "Contact",
+    contactTitle: "Contact and collaboration",
+    bfhProfile: "BFH profile",
+    top: "To top",
+    projects: {
+      foresait: ["2025-2026 · SNSF Spark", "FORESAIT - Forecasting in Social Assistance", "Linked register data and machine learning are used to forecast trajectories in social assistance in a precise, fair and practice-oriented way."],
+      prediction: ["2025-2028 · Canton of Bern/SKOS", "Forecasting skills of social assistance professionals", "Professional forecasts serve as a benchmark for statistical models. The project examines where models add information and where professional judgement remains central."],
+      fokus: ["2025-2026 · City of Biel", "Fokus Arbeit: Measuring long-term impact", "The evaluation of the group intervention is extended over the long term to assess effects on employment, income, social assistance receipt and personal resources."],
+      "wohlen-dashboard": ["Regional Social Service Wohlen · Dashboard", "Cost dashboard for the Regional Social Service Wohlen", "Data analyses are prepared in a way that makes cost trends and management questions in social organisations easy to access."],
+      "ai-survey": ["2026 · AI Micro Grant BFH", "Survey on AI use in the social sector", "An empirical snapshot of how professionals in the social sector use, assess and organisationally embed generative AI."],
+      health: ["2020-2021 · FOPH", "Health of social assistance recipients", "Swiss linked data show health burdens, service use and links with labour market integration."],
+      divorce: ["2014-2020 · SNSF", "Divorce as a social risk", "The project studies economic, social and institutional consequences of divorce in Switzerland, especially by gender and poverty."],
+      "family-unemployment": ["2018-2023 · SNSF", "Family models and unemployment", "Analyses of unemployment insurance, household responsibilities, health, partnership stability, birth outcomes and economic precarity."],
+      "violence-costs": ["2024-2028 · KidsToo Foundation", "Costs of intimate partner violence", "An ongoing project on societal and institutional costs of intimate partner violence, depending on secured data access."],
+    },
+  },
+  fr: {
+    title: "Prof. Dr. Dorian Kessler | Effets, données et sécurité sociale",
+    description:
+      "Page personnelle du Prof. Dr. Dorian Kessler sur les effets, les données liées, les modèles prédictifs de risque, l'IA générative, la pauvreté, la famille et la sécurité sociale.",
+    headerLabel: "Navigation principale",
+    languageLabel: "Langues",
+    nav: ["Profil", "Projets", "Publications", "Contact"],
+    context: `${makeLink(BFH_LINK, "BFH Travail social")} · ${makeLink(
+      IORG_LINK,
+      "Institut Organisation et management social"
+    )}`,
+    lead:
+      "Mes travaux portent sur les effets des organisations sociales, la science des données en travail social et les risques sociaux à l'intersection de la pauvreté, de la famille, de la santé et de la politique sociale.",
+    profileButton: "Profil",
+    projectButton: "Projets",
+    portraitAlt: "Portrait du Prof. Dr. Dorian Kessler",
+    portraitCaption: "Prof. Dr. Dorian Kessler, BFH Travail social",
+    profileKicker: "Profil",
+    profileTitle: "Science des données en travail social, avec un accent sur les effets.",
+    profileText: [
+      `Je suis professeur à la ${makeLink(BFH_LINK, "BFH Travail social")} et travaille à l'${makeLink(IORG_LINK, "Institut Organisation et management social")}. J'utilise des données liées pour étudier empiriquement les effets, la pauvreté, la famille, la santé et la politique sociale.`,
+      "Les données liées sont des jeux de données réunis dans le respect de la protection des données, par exemple des informations sur l'aide sociale, les assurances sociales, la santé, les parcours professionnels, les ménages ou les événements familiaux.",
+      "Je m'intéresse aussi à l'IA générative et aux modèles prédictifs de risque comme outils pouvant soutenir les décisions professionnelles dans la pratique du travail social, mais qui doivent être évalués sur les plans professionnel, éthique et empirique. Pour les questions d'effet, j'utilise des designs robustes qui comparent les évolutions avant et après une intervention ou une réforme avec des groupes de comparaison appropriés.",
+    ],
+    projectsKicker: "Projets",
+    projectsTitle:
+      "Projets sélectionnés autour des effets, des données et de la sécurité sociale.",
+    filters: { all: "Tous", wirkung: "Effets", ki: "Données/IA", armut: "Pauvreté/Famille" },
+    projectLinks: { project: "Page du projet", blog: "Des analyses de données simplifiées" },
+    publicationsKicker: "Publications",
+    publicationsTitle:
+      "Publications et contributions choisies dans les médias et le débat professionnel.",
+    peerTitle: "Publications évaluées par les pairs",
+    mediaTitle: "Presse et télévision",
+    arbor: "Liste actualisée des publications sur ARBOR",
+    notes: ["Ouvrir la contribution", "Ouvrir l'émission", "Ouvrir l'article"],
+    original: "Ouvrir la page originale",
+    contactKicker: "Contact",
+    contactTitle: "Contact et collaboration",
+    bfhProfile: "Profil BFH",
+    top: "Haut de page",
+    projects: {
+      foresait: ["2025-2026 · FNS Spark", "FORESAIT - Forecasting in Social Assistance", "Des données de registre liées et l'apprentissage automatique sont utilisés pour prévoir les parcours dans l'aide sociale de manière précise, équitable et utile à la pratique."],
+      prediction: ["2025-2028 · Canton de Berne/CSIAS", "Compétences pronostiques des professionnel-le-s de l'aide sociale", "Les pronostics professionnels servent de point de comparaison aux modèles statistiques. Le projet examine où les modèles ajoutent de l'information et où le jugement professionnel reste central."],
+      fokus: ["2025-2026 · Ville de Bienne", "Fokus Arbeit: mesure des effets à long terme", "L'évaluation de l'intervention de groupe est prolongée afin de rendre visibles les effets sur l'emploi, le revenu, le recours à l'aide sociale et les ressources personnelles."],
+      "wohlen-dashboard": ["Service social régional de Wohlen · Tableau de bord", "Tableau de bord des coûts du Service social régional de Wohlen", "Les analyses de données sont préparées de manière à rendre les évolutions des coûts et les questions de pilotage dans les organisations sociales facilement accessibles."],
+      "ai-survey": ["2026 · AI Micro Grant BFH", "Enquête sur l'utilisation de l'IA dans le domaine social", "Un aperçu empirique de la manière dont les professionnel-le-s du domaine social utilisent, évaluent et intègrent organisationnellement l'IA générative."],
+      health: ["2020-2021 · OFSP", "Santé des bénéficiaires de l'aide sociale", "Des données suisses liées montrent les charges de santé, l'utilisation des services et les liens avec l'intégration professionnelle."],
+      divorce: ["2014-2020 · FNS", "Le divorce comme risque social", "Le projet étudie les conséquences économiques, sociales et institutionnelles du divorce en Suisse, notamment selon le genre et la pauvreté."],
+      "family-unemployment": ["2018-2023 · FNS", "Modèles familiaux et chômage", "Analyses de l'assurance-chômage, des responsabilités au sein du ménage, de la santé, de la stabilité du couple, des issues de naissance et de la précarité économique."],
+      "violence-costs": ["2024-2028 · Fondation KidsToo", "Coûts de la violence dans les relations de couple", "Un projet en cours sur les coûts sociaux et institutionnels de la violence dans les relations de couple, en fonction de l'accès sécurisé aux données."],
+    },
+  },
+};
+
+const params = new URLSearchParams(window.location.search);
+const requestedLang = params.get("lang");
+const lang = Object.prototype.hasOwnProperty.call(translations, requestedLang) ? requestedLang : "de";
+const t = translations[lang];
+const setText = (selector, value) => {
+  const element = document.querySelector(selector);
+  if (element) element.textContent = value;
+};
+const setHTML = (selector, value) => {
+  const element = document.querySelector(selector);
+  if (element) element.innerHTML = value;
+};
+
+document.documentElement.lang = lang;
+document.title = t.title;
+document.querySelector('meta[name="description"]')?.setAttribute("content", t.description);
+document.querySelector(".site-header")?.setAttribute("aria-label", t.headerLabel);
+document.querySelector(".language-nav")?.setAttribute("aria-label", t.languageLabel);
+document.querySelectorAll(".language-nav a").forEach((anchor) => {
+  if (anchor.dataset.lang === lang) anchor.setAttribute("aria-current", "page");
+  else anchor.removeAttribute("aria-current");
+});
+document.querySelectorAll(".site-nav a").forEach((anchor, index) => {
+  anchor.textContent = t.nav[index] || anchor.textContent;
+});
+
+setHTML(".mark-row span", t.context);
+setText(".lead", t.lead);
+setText('.hero-actions a[href="#profil"]', t.profileButton);
+setText('.hero-actions a[href="#projekte"]', t.projectButton);
+const portraitImageNew = document.querySelector(".portrait img");
+if (portraitImageNew) {
+  portraitImageNew.src = BFH_IMAGE;
+  portraitImageNew.alt = t.portraitAlt;
 }
-
-if (footerNote) {
-  footerNote.remove();
+setText(".portrait figcaption", t.portraitCaption);
+setText("#profil .kicker", t.profileKicker);
+setText("#profil h2", t.profileTitle);
+document.querySelectorAll("#profil .profile-copy p").forEach((paragraph, index) => {
+  paragraph.innerHTML = t.profileText[index] || paragraph.innerHTML;
+});
+setText("#projekte .kicker", t.projectsKicker);
+setText("#projekte h2", t.projectsTitle);
+Object.entries(t.filters).forEach(([key, value]) => {
+  setText(`.filter-button[data-filter="${key}"]`, value);
+});
+document.querySelectorAll(".project-card").forEach((card) => {
+  const project = t.projects[card.dataset.project];
+  if (!project) return;
+  card.querySelector(".tag").textContent = project[0];
+  card.querySelector("h3").textContent = project[1];
+  card.querySelector("p").textContent = project[2];
+  const anchor = card.querySelector("a");
+  if (anchor) anchor.textContent = card.dataset.project === "wohlen-dashboard" ? t.projectLinks.blog : t.projectLinks.project;
+});
+setText("#publikationen .kicker", t.publicationsKicker);
+setText("#publikationen h2", t.publicationsTitle);
+const publicationColumnsNew = document.querySelectorAll(".publication-columns > div");
+if (publicationColumnsNew[0]) {
+  publicationColumnsNew[0].querySelector("h3").textContent = t.peerTitle;
+  publicationColumnsNew[0].querySelectorAll(".source-card-note").forEach((note) => {
+    note.textContent = t.original;
+  });
+  publicationColumnsNew[0].querySelector(".text-link").textContent = t.arbor;
 }
-
-if (projectNavLink) {
-  projectNavLink.textContent = "Projekte";
+if (publicationColumnsNew[1]) {
+  publicationColumnsNew[1].querySelector("h3").textContent = t.mediaTitle;
+  publicationColumnsNew[1].querySelectorAll(".source-card-note").forEach((note, index) => {
+    note.textContent = t.notes[Math.min(index, 2)];
+  });
 }
+setText("#kontakt .kicker", t.contactKicker);
+setText("#kontakt h2", t.contactTitle);
+setText('.contact-actions a[href*="bfh.ch"]', t.bfhProfile);
+setText(".site-footer a", t.top);
 
-if (publicationNavLink) {
-  publicationNavLink.textContent = "Publikationen";
-}
-
-if (projectKicker) {
-  projectKicker.textContent = "Projekte";
-}
-
-if (publicationKicker) {
-  publicationKicker.textContent = "Publikationen";
-}
-
-if (impactParagraph) {
-  impactParagraph.textContent =
-    "In diesem Rahmen interessieren mich auch generative KI und Predictive Risk Models: als Werkzeuge, die fachliche Entscheide in der Praxis der Sozialen Arbeit unterstützen können, aber fachlich, ethisch und empirisch geprüft werden müssen. Für Wirkungsfragen nutze ich robuste Designs, die Veränderungen vor und nach einer Intervention oder Reform mit geeigneten Vergleichsgruppen betrachten.";
-}
-
-if (portraitImage) {
-  portraitImage.src = portraitUrl;
-}
-
-const styleFix = document.createElement("style");
-styleFix.textContent = ".publication-columns{gap:clamp(24px,5vw,74px)}";
-document.head.appendChild(styleFix);
-
-filterButtons.forEach((button) => {
+document.querySelectorAll(".filter-button").forEach((button) => {
   button.addEventListener("click", () => {
     const filter = button.dataset.filter;
-    filterButtons.forEach((item) => item.classList.remove("active"));
+    document.querySelectorAll(".filter-button").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
-
-    projectCards.forEach((card) => {
+    document.querySelectorAll(".project-card").forEach((card) => {
       const topics = card.dataset.topic || "";
       const visible = filter === "all" || topics.includes(filter);
       card.classList.toggle("is-hidden", !visible);
