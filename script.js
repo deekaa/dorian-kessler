@@ -49,6 +49,7 @@ const translations = {
     original: "Originalseite öffnen",
     contactKicker: "Kontakt",
     contactTitle: "Kontakt und Zusammenarbeit",
+    email: "Email",
     bfhProfile: "BFH-Profil",
     top: "Nach oben",
     projects: {
@@ -102,6 +103,7 @@ const translations = {
     original: "Open original page",
     contactKicker: "Contact",
     contactTitle: "Contact and collaboration",
+    email: "Email",
     bfhProfile: "BFH profile",
     top: "To top",
     projects: {
@@ -156,6 +158,7 @@ const translations = {
     original: "Ouvrir la page originale",
     contactKicker: "Contact",
     contactTitle: "Contact et collaboration",
+    email: "E-mail",
     bfhProfile: "Profil BFH",
     top: "Haut de page",
     projects: {
@@ -246,7 +249,8 @@ if (publicationColumnsNew[1]) {
 }
 setText("#kontakt .kicker", t.contactKicker);
 setText("#kontakt h2", t.contactTitle);
-setText('.contact-actions a[href*="bfh.ch"]', t.bfhProfile);
+setText('.contact-actions a[href^="mailto:"]', t.email);
+setText('.contact-actions a[href^="https://www.bfh.ch/"]', t.bfhProfile);
 setText(".site-footer a", t.top);
 
 document.querySelectorAll(".filter-button").forEach((button) => {
