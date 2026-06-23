@@ -27,7 +27,7 @@ const translations = {
     profileKicker: "Profil",
     profileTitle: "Datenwissenschaft in der Sozialen Arbeit mit Schwerpunkt Wirksamkeit.",
     profileText: [
-      `Ich bin Professor an der ${makeLink(BFH_LINK, "BFH Soziale Arbeit")} und am ${makeLink(
+      `Ich bin als Forscher und Dozent an der ${makeLink(BFH_LINK, "BFH Soziale Arbeit")} und am ${makeLink(
         IORG_LINK,
         "Institut Organisation und Sozialmanagement"
       )} tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.`,
@@ -83,7 +83,7 @@ const translations = {
     profileKicker: "Profile",
     profileTitle: "Data science in social work with a focus on impact.",
     profileText: [
-      `I am Professor at the ${makeLink(BFH_LINK, "BFH School of Social Work")} and work at the ${makeLink(IORG_LINK, "Institute for Organisation and Social Management")}. I use linked data to study impact, poverty, family, health and social policy empirically.`,
+      `I work as a researcher and lecturer at the ${makeLink(BFH_LINK, "BFH School of Social Work")} and at the ${makeLink(IORG_LINK, "Institute for Organisation and Social Management")}. I use linked data to study impact, poverty, family, health and social policy empirically.`,
       "Linked data are datasets that are combined in a privacy-preserving way, for example information on social assistance, social insurance, health, employment histories, households or family events. This makes transitions and burdens visible that often remain only partly observable in individual data sources.",
       "I am also interested in generative AI and predictive risk models as tools that may support professional decisions in social work practice, but need to be assessed professionally, ethically and empirically. For impact questions, I use robust designs that compare developments before and after an intervention or reform with suitable comparison groups.",
     ],
@@ -136,7 +136,7 @@ const translations = {
     profileKicker: "Profil",
     profileTitle: "Science des données en travail social, avec un accent sur les effets.",
     profileText: [
-      `Je suis professeur à la ${makeLink(BFH_LINK, "BFH Travail social")} et travaille à l'${makeLink(IORG_LINK, "Institut Organisation et management social")}. J'utilise des données liées pour étudier empiriquement les effets, la pauvreté, la famille, la santé et la politique sociale.`,
+      `Je travaille comme chercheur et enseignant à la ${makeLink(BFH_LINK, "BFH Travail social")} et à l'${makeLink(IORG_LINK, "Institut Organisation et management social")}. J'utilise des données liées pour étudier empiriquement les effets, la pauvreté, la famille, la santé et la politique sociale.`,
       "Les données liées sont des jeux de données réunis dans le respect de la protection des données, par exemple des informations sur l'aide sociale, les assurances sociales, la santé, les parcours professionnels, les ménages ou les événements familiaux.",
       "Je m'intéresse aussi à l'IA générative et aux modèles prédictifs de risque comme outils pouvant soutenir les décisions professionnelles dans la pratique du travail social, mais qui doivent être évalués sur les plans professionnel, éthique et empirique. Pour les questions d'effet, j'utilise des designs robustes qui comparent les évolutions avant et après une intervention ou une réforme avec des groupes de comparaison appropriés.",
     ],
@@ -198,7 +198,6 @@ document.querySelectorAll(".site-nav a").forEach((anchor, index) => {
   anchor.textContent = t.nav[index] || anchor.textContent;
 });
 
-setHTML(".mark-row span", t.context);
 setText(".lead", t.lead);
 setText('.hero-actions a[href="#profil"]', t.profileButton);
 setText('.hero-actions a[href="#projekte"]', t.projectButton);

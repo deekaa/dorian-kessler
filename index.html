@@ -30,20 +30,7 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <div class="mark-row">
-              <svg class="evidence-mark" viewBox="0 0 72 72" role="img" aria-label="Symbol für Evidenz">
-                <path class="axis" d="M18 14 V56 H60"></path>
-                <path class="trend" d="M20 48 L31 39 L42 43 L56 25"></path>
-                <circle cx="20" cy="48" r="3"></circle>
-                <circle cx="31" cy="39" r="3"></circle>
-                <circle cx="42" cy="43" r="3"></circle>
-                <circle cx="56" cy="25" r="3"></circle>
-                <path class="check" d="M34 25 L40 31 L52 17"></path>
-              </svg>
-              <span>
-                <a href="https://www.bfh.ch/soziale-arbeit/de/" target="_blank" rel="noreferrer">BFH Soziale Arbeit</a>
-                ·
-                <a href="https://www.bfh.ch/soziale-arbeit/de/forschung/forschungsbereiche/institut-organisation-sozialmanagement/" target="_blank" rel="noreferrer">Institut Organisation und Sozialmanagement</a>
-              </span>
+              <img class="hero-logo" src="./assets/dorian-linked-registers-logo.svg" alt="Symbol für verknüpfte Registerdaten" />
             </div>
             <h1>Dorian Kessler</h1>
             <p class="lead">
@@ -74,7 +61,7 @@
           </div>
           <div class="profile-copy">
             <p>
-              Ich bin Professor an der
+              Ich bin als Forscher und Dozent an der
               <a class="inline-link" href="https://www.bfh.ch/soziale-arbeit/de/" target="_blank" rel="noreferrer">BFH Soziale Arbeit</a>
               und am
               <a class="inline-link" href="https://www.bfh.ch/soziale-arbeit/de/forschung/forschungsbereiche/institut-organisation-sozialmanagement/" target="_blank" rel="noreferrer">Institut Organisation und Sozialmanagement</a>
@@ -470,7 +457,7 @@ const translations = {
     profileKicker: "Profil",
     profileTitle: "Datenwissenschaft in der Sozialen Arbeit mit Schwerpunkt Wirksamkeit.",
     profileText: [
-      `Ich bin Professor an der ${makeLink(BFH_LINK, "BFH Soziale Arbeit")} und am ${makeLink(
+      `Ich bin als Forscher und Dozent an der ${makeLink(BFH_LINK, "BFH Soziale Arbeit")} und am ${makeLink(
         IORG_LINK,
         "Institut Organisation und Sozialmanagement"
       )} tätig. Ich arbeite mit verknüpften Daten, um Fragen zu Wirksamkeit, Armut, Familie, Gesundheit und Sozialpolitik empirisch zu untersuchen.`,
@@ -526,7 +513,7 @@ const translations = {
     profileKicker: "Profile",
     profileTitle: "Data science in social work with a focus on impact.",
     profileText: [
-      `I am Professor at the ${makeLink(BFH_LINK, "BFH School of Social Work")} and work at the ${makeLink(IORG_LINK, "Institute for Organisation and Social Management")}. I use linked data to study impact, poverty, family, health and social policy empirically.`,
+      `I work as a researcher and lecturer at the ${makeLink(BFH_LINK, "BFH School of Social Work")} and at the ${makeLink(IORG_LINK, "Institute for Organisation and Social Management")}. I use linked data to study impact, poverty, family, health and social policy empirically.`,
       "Linked data are datasets that are combined in a privacy-preserving way, for example information on social assistance, social insurance, health, employment histories, households or family events. This makes transitions and burdens visible that often remain only partly observable in individual data sources.",
       "I am also interested in generative AI and predictive risk models as tools that may support professional decisions in social work practice, but need to be assessed professionally, ethically and empirically. For impact questions, I use robust designs that compare developments before and after an intervention or reform with suitable comparison groups.",
     ],
@@ -579,7 +566,7 @@ const translations = {
     profileKicker: "Profil",
     profileTitle: "Science des données en travail social, avec un accent sur les effets.",
     profileText: [
-      `Je suis professeur à la ${makeLink(BFH_LINK, "BFH Travail social")} et travaille à l'${makeLink(IORG_LINK, "Institut Organisation et management social")}. J'utilise des données liées pour étudier empiriquement les effets, la pauvreté, la famille, la santé et la politique sociale.`,
+      `Je travaille comme chercheur et enseignant à la ${makeLink(BFH_LINK, "BFH Travail social")} et à l'${makeLink(IORG_LINK, "Institut Organisation et management social")}. J'utilise des données liées pour étudier empiriquement les effets, la pauvreté, la famille, la santé et la politique sociale.`,
       "Les données liées sont des jeux de données réunis dans le respect de la protection des données, par exemple des informations sur l'aide sociale, les assurances sociales, la santé, les parcours professionnels, les ménages ou les événements familiaux.",
       "Je m'intéresse aussi à l'IA générative et aux modèles prédictifs de risque comme outils pouvant soutenir les décisions professionnelles dans la pratique du travail social, mais qui doivent être évalués sur les plans professionnel, éthique et empirique. Pour les questions d'effet, j'utilise des designs robustes qui comparent les évolutions avant et après une intervention ou une réforme avec des groupes de comparaison appropriés.",
     ],
@@ -641,7 +628,6 @@ document.querySelectorAll(".site-nav a").forEach((anchor, index) => {
   anchor.textContent = t.nav[index] || anchor.textContent;
 });
 
-setHTML(".mark-row span", t.context);
 setText(".lead", t.lead);
 setText('.hero-actions a[href="#profil"]', t.profileButton);
 setText('.hero-actions a[href="#projekte"]', t.projectButton);

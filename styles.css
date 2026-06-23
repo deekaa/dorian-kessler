@@ -122,8 +122,7 @@ ul {
   background: linear-gradient(90deg, rgba(246, 247, 242, 0.86), rgba(246, 247, 242, 0));
 }
 
-.kicker,
-.mark-row span {
+.kicker {
   margin-bottom: 14px;
   color: var(--red);
   font-size: 0.78rem;
@@ -136,14 +135,9 @@ ul {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-.mark-row span {
-  margin-bottom: 0;
-}
-
-.mark-row a,
 .inline-link {
   color: var(--blue);
   text-decoration: underline;
@@ -151,40 +145,11 @@ ul {
   text-underline-offset: 0.16em;
 }
 
-.evidence-mark {
+.hero-logo {
   flex: 0 0 auto;
-  width: 54px;
-  height: 54px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  overflow: visible;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.74);
-}
-
-.evidence-mark circle {
-  fill: var(--red);
-}
-
-.evidence-mark path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.evidence-mark .axis {
-  stroke: var(--line-strong);
-  stroke-width: 2;
-}
-
-.evidence-mark .trend {
-  stroke: var(--ink);
-  stroke-width: 3;
-}
-
-.evidence-mark .check {
-  stroke: var(--red);
-  stroke-width: 4;
+  width: clamp(58px, 7vw, 82px);
+  height: clamp(58px, 7vw, 82px);
+  filter: drop-shadow(0 12px 24px rgba(21, 24, 23, 0.12));
 }
 
 h1,

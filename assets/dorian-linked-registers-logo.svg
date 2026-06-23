@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="168" viewBox="0 0 168 168" role="img" aria-labelledby="title">
+  <title id="title">Symbol für verknüpfte Registerdaten</title>
+  <rect x="2.5" y="2.5" width="163" height="163" rx="30" fill="#FFFFFF" stroke="#9EA3A6" stroke-width="5"/>
+  <ellipse cx="84" cy="51" rx="50" ry="18" fill="none" stroke="#151817" stroke-width="7"/>
+  <path d="M34 51 V104 C34 116 56 125 84 125 C112 125 134 116 134 104 V51" fill="none" stroke="#151817" stroke-width="7"/>
+  <path d="M34 79 C34 91 56 100 84 100 C112 100 134 91 134 79" fill="none" stroke="#9EA3A6" stroke-width="5"/>
+  <circle cx="42" cy="134" r="8" fill="#D71920"/>
+  <circle cx="84" cy="149" r="8" fill="#D71920"/>
+  <circle cx="126" cy="134" r="8" fill="#D71920"/>
+  <line x1="50" y1="136" x2="76" y2="146" stroke="#D71920" stroke-width="5" stroke-linecap="round"/>
+  <line x1="92" y1="146" x2="118" y2="136" stroke="#D71920" stroke-width="5" stroke-linecap="round"/>
+</svg>
