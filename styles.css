@@ -603,6 +603,17 @@ h3 {
   min-width: 0;
 }
 
+.publication-links {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  margin-top: 18px;
+}
+
+.publication-links .text-link {
+  margin-top: 0;
+}
+
 .source-card {
   display: grid;
   min-height: 100%;

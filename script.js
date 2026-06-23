@@ -44,6 +44,7 @@ const translations = {
     peerTitle: "Peer-reviewte Publikationen",
     mediaTitle: "Zeitung und Fernsehen",
     arbor: "Aktualisierte Publikationsliste auf ARBOR",
+    scholar: "Google Scholar-Publikationsliste",
     notes: ["Beitrag öffnen", "Sendung öffnen", "Artikel öffnen"],
     original: "Originalseite öffnen",
     contactKicker: "Kontakt",
@@ -96,6 +97,7 @@ const translations = {
     peerTitle: "Peer-reviewed publications",
     mediaTitle: "Newspapers and television",
     arbor: "Updated publication list on ARBOR",
+    scholar: "Google Scholar publication list",
     notes: ["Open contribution", "Open broadcast", "Open article"],
     original: "Open original page",
     contactKicker: "Contact",
@@ -149,6 +151,7 @@ const translations = {
     peerTitle: "Publications évaluées par les pairs",
     mediaTitle: "Presse et télévision",
     arbor: "Liste actualisée des publications sur ARBOR",
+    scholar: "Liste des publications sur Google Scholar",
     notes: ["Ouvrir la contribution", "Ouvrir l'émission", "Ouvrir l'article"],
     original: "Ouvrir la page originale",
     contactKicker: "Contact",
@@ -232,7 +235,9 @@ if (publicationColumnsNew[0]) {
   publicationColumnsNew[0].querySelectorAll(".source-card-note").forEach((note) => {
     note.textContent = t.original;
   });
-  publicationColumnsNew[0].querySelector(".text-link").textContent = t.arbor;
+  const textLinks = publicationColumnsNew[0].querySelectorAll(".text-link");
+  if (textLinks[0]) textLinks[0].textContent = t.arbor;
+  if (textLinks[1]) textLinks[1].textContent = t.scholar;
 }
 if (publicationColumnsNew[1]) {
   publicationColumnsNew[1].querySelector("h3").textContent = t.mediaTitle;
